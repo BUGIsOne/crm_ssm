@@ -18,6 +18,19 @@
     from stock_in
     where Id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByPnum" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from stock_in
+    where Pnum = #{pnum,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectAllStock_in"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from stock_in
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from stock_in
     where Id = #{id,jdbcType=INTEGER}
@@ -28,7 +41,7 @@
     values (#{id,jdbcType=INTEGER}, #{numberIn,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP}, 
       #{uid,jdbcType=INTEGER}, #{pnum,jdbcType=VARCHAR}, #{sid,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.ll.pojo.Stock_in">
+  <insert id="insertSelective" parameterType="com.ll.pojo.Stock_in" keyProperty="id" useGeneratedKeys="true">
     insert into stock_in
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

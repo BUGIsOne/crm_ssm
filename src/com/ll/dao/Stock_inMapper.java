@@ -1,5 +1,7 @@
 package com.ll.dao;
 
+import java.util.List;
+
 import com.ll.pojo.Stock_in;
 
 public interface Stock_inMapper {
@@ -14,4 +16,9 @@ public interface Stock_inMapper {
     int updateByPrimaryKeySelective(Stock_in record);
 
     int updateByPrimaryKey(Stock_in record);
+    
+    List<Stock_in> selectAllStock_in();
+    //根据产品编号的到进货量
+    Stock_in selectByPnum(String pnum);
+    
 }

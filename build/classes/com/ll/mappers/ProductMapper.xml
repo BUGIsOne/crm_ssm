@@ -9,6 +9,21 @@
     <result column="Pprice" jdbcType="INTEGER" property="pprice" />
     <result column="createDate" jdbcType="TIMESTAMP" property="createdate" />
     <result column="Pnumber" jdbcType="INTEGER" property="pnumber" />
+  
+  <!-- 一对多关联查询 -->
+    <!-- <collection 
+    	property="pnum" 
+    	ofType="com.ll.pojo.Stock_in" 
+    	column="Pname" 
+    	select="com.ll.dao.Stock_inMapper.selectByPnum" >
+    </collection> -->
+  <!-- 一对多关联查询 -->
+   <!--  <collection 
+    	property="pnum" 
+    	ofType="com.ll.pojo.Stock_out" 
+    	column="Pname" 
+    	select="com.ll.dao.Stock_outMapper.selectByPnum" >
+    </collection> -->
   </resultMap>
   <sql id="Base_Column_List">
     Id, Pnum, Pname, Sid, Pprice, createDate, Pnumber

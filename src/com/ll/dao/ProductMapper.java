@@ -9,7 +9,7 @@ public interface ProductMapper {
     int deleteByPrimaryKey(Integer id);
 
     int insert(Product record);
-
+   
     int insertSelective(Product record);
 
     Product selectByPrimaryKey(Integer id);
@@ -23,4 +23,6 @@ public interface ProductMapper {
 	List<Product> selectAllProduct();
 	
 	Product selectByPname(String pname);
+	
+	
 }

@@ -76,7 +76,7 @@
 
 			
 			<tr>
-				<td colspan="2" align="center"><input type="button" value="添加新用户"
+				<td colspan="2" align="center"><input type="button" value="添加新供应商"
 					onclick="allIsNull()" /></td>
 			</tr>
 		</table>

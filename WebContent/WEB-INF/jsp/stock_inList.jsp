@@ -14,24 +14,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 <%-- <%=basePath %> --%>
-    <h1>商品列表</h1>
-    <a href="<%=basePath %>product/main" >返回</a>
+    <h1>进货列表</h1>
+    <a href="<%=basePath %>stock_in/main" >返回</a>
     <table>
         <tr>
-            <th>编号</th>
-            <th>商品名称</th>
-            <th>供货商id</th>
-            <th>价格</th>
+            <th>产品编号</th>
+            <th>供应商编号</th>
             <th>数量</th>
         </tr>
         <!-- JSTL标签，请参考本书的相关内容 -->
-        <c:forEach items="${products}" var="product">
+        <c:forEach items="${stock_ins}" var="stock_in">
             <tr>
-                <td>${product.pnum }</td>
-                <td>${product.pname}</td>
-                <td>${product.sid }</td>
-                <td>${product.pprice }</td>
-                <td>${product.pnumber }</td>
+                <td>${stock_in.pnum }</td>
+                <td>${stock_in.sid}</td>
+                <td>${stock_in.numberIn }</td>
             </tr>
         </c:forEach>
     </table>

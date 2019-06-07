@@ -23,6 +23,8 @@
 <a href="${pageContext.request.contextPath }/index/supplier/profile">添加供应商</a><br><br>
 
 <a href="${pageContext.request.contextPath }/product/list">物资列表</a><br>
+<a href="${pageContext.request.contextPath }/stock_in/list">进货列表</a><br>
+<a href="${pageContext.request.contextPath }/stock_out/list">出货列表</a><br>
 <a href="${pageContext.request.contextPath }/index/product/find">查找物资</a><br>
 <a href="${pageContext.request.contextPath }/index/product/profile">添加物资</a><br><br>
 
