@@ -11,4 +11,7 @@ public interface FeedbackService {
 	Feedback findFeedback(Feedback feedback);
 	Feedback findFeedbackByCid(Integer cid);
 	void deleteByPrimaryKey(Integer id);
+	//添加新服务
+	boolean addFeedback(Feedback feedback);
+	
 }

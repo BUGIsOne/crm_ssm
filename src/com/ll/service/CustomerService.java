@@ -12,4 +12,5 @@ public interface CustomerService {
 	Customer findCustomer(Customer customer);
 	Customer findCustomerByCname(String cname);
 	void deleteByPrimaryKey(Integer id);
+	boolean addCustomer(Customer customer);
 }

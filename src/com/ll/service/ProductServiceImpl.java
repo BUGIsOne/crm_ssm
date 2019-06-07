@@ -44,4 +44,15 @@ public class ProductServiceImpl implements ProductService{
 		productDao.deleteByPrimaryKey(id);
 	}
 
+	@Override
+	public boolean addProduct(Product product) {
+		// TODO Auto-generated method stub
+		int result = productDao.insertSelective(product);
+		if (1 == result) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }

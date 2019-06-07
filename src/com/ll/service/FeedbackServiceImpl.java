@@ -42,4 +42,15 @@ public class FeedbackServiceImpl implements FeedbackService{
 		// TODO Auto-generated method stub
 		feedbackDao.deleteByPrimaryKey(id);
 	}
+
+	@Override
+	public boolean addFeedback(Feedback feedback) {
+		// TODO Auto-generated method stub
+		int result = feedbackDao.insertSelective(feedback);
+		if (1 == result) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

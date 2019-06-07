@@ -40,7 +40,7 @@
       #{cnumber,jdbcType=VARCHAR}, #{caddr,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, 
       #{cemail,jdbcType=VARCHAR}, #{crank,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ll.pojo.Customer">
+  <insert id="insertSelective" parameterType="com.ll.pojo.Customer" keyProperty="id" useGeneratedKeys="true">
     insert into customer
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

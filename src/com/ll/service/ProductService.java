@@ -11,4 +11,6 @@ public interface ProductService {
 	Product findProduct(Product product);
 	Product findProductByPname(String pname);
 	void deleteByPrimaryKey(Integer id);
+	//添加新产品
+	boolean addProduct(Product product);
 }

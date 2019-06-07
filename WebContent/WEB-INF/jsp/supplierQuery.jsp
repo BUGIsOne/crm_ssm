@@ -24,7 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			document.queryForm.sname.focus();
 			return false;
 		}
-		document.queryForm.submit();
+		document.queryForm.submit();		
 		return true;
 	}
 </script>

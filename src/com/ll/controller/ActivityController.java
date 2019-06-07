@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ll.pojo.Activity;
+import com.ll.pojo.Admin;
 import com.ll.pojo.Activity;
 import com.ll.pojo.Activity;
 import com.ll.service.ActivityService;
@@ -31,8 +32,10 @@ public class ActivityController {
 	 * 查询
 	 */
 	 @RequestMapping("/find")
-	 public String findActivity(@Param("aitem") String aitem, Model model){
+	 public String findActivity(@Param("aitem") String aitem, HttpSession session, Model model){
 		Activity findActivity = activityService.findActivityByAitem(aitem);  //根据aitem获取用户详情
+		//建立session，处理删除操作是方便传值
+		session.setAttribute("activity", findActivity);
     	model.addAttribute("findActivity", findActivity);
     	logger.info("【操作】：根据aitem查询用户详情...");
     	System.out.println();
@@ -44,7 +47,10 @@ public class ActivityController {
 	  */
 	 @RequestMapping("/delete")
 	 public String delete(Activity activity, HttpSession session, Model model) {
-		 Activity activity2 = (Activity) session.getAttribute("u");
+		 //取不到
+//		 Activity activity2 = activityService.findActivity(activity);
+//		 System.out.println(activity2);
+		 Activity activity2 = (Activity) session.getAttribute("activity");
 		 activityService.deleteByPrimaryKey(activity2.getId());
 		 logger.info("删除成功");
 		 return "main";

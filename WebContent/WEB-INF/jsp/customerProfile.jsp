@@ -11,32 +11,32 @@
 }
 </style>
 <script type="text/javascript">
-	//注册时检查输入项
 	function allIsNull() {
-		var aitem = document.profileForm.aitem.value;
-		var adetail = document.profileForm.adetail.value;
-		var cus = document.profileForm.cus.value;
-		if (aitem == "") {
+		var cnum = document.profileForm.cnum.value;
+		var cname = document.profileForm.cname.value;
+		var cnumber = document.profileForm.cnumber.value;
+		var caddr = document.profileForm.caddr.value;
+		if (cnum == "") {
 			alert("请输入编号！");
-			document.profileForm.aitem.focus();
+			document.profileForm.cnum.focus();
 			return false;
 		}
-		if (adetail == "") {
+		if (cname == "") {
 			alert("请输入姓名！");
-			document.profileForm.adetail.focus();
+			document.profileForm.cname.focus();
 			return false;
 		}
-		if (cus == "") {
+		if (cnumber == "") {
 			alert("请输入电话！");
-			document.profileForm.cus.focus();
+			document.profileForm.cnumber.focus();
 			return false;
 		}
-		if (cus == "") {
+		if (caddr == "") {
 			alert("请输入地址！");
-			document.profileForm.cus.focus();
+			document.profileForm.caddr.focus();
 			return false;
 		}
-		
+		alert("添加成功！");
 		document.profileForm.submit();
 		return true;
 	}
@@ -45,25 +45,30 @@
 </head>
 <body>
 	<h1 align="center">添加客户</h1>
-	<form action="${pageContext.request.contextPath }/activity/profile"
+	<form action="${pageContext.request.contextPath }/customer/profile"
 		method="post" name="profileForm">
  	<table border=1 bgcolor="lavender" align="center">
 		<tr>
 			<td>编号：</td>
-			<td><input class="textSize" type="text" name="aitem"
-				value="${activity.aitem }" /></td>
+			<td><input class="textSize" type="text" name="cnum"
+				value="${customer.cnum }" /></td>
 		</tr>
 		<tr>
 			<td>姓名：</td>
-			<td><input class="textSize" type="text" name="adetail"
-				value="${activity.adetail }" /></td>
+			<td><input class="textSize" type="text" name="cname"
+				value="${customer.cname }" /></td>
 		</tr>
 		<tr>
 			<td>电话：</td>
-			<td><input class="textSize" type="text" name="cus"
-				value="${activity.cus }" /></td>
+			<td><input class="textSize" type="text" name="cnumber"
+				value="${customer.cnumber }" /></td>
 		</tr>
-        
+        <tr>
+			<td>地址：</td>
+			<td><input class="textSize" type="text" name="caddr"
+				value="${customer.caddr }" /></td>
+		</tr>
+		
         <tr>
 			<td colspan="2" align="center"><input type="button" value="添加新客户"
 					onclick="allIsNull()" /></td>

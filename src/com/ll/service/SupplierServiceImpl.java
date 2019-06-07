@@ -43,4 +43,15 @@ public class SupplierServiceImpl implements SupplierService{
 		supplierDao.deleteByPrimaryKey(id);
 	}
 
+	@Override
+	public boolean addSupplier(Supplier supplier) {
+		// TODO Auto-generated method stub
+		int result = supplierDao.insertSelective(supplier);
+		if (1 == result) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }

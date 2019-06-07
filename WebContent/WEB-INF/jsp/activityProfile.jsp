@@ -31,7 +31,7 @@
 			document.profileForm.cus.focus();
 			return false;
 		}
-
+		alert("添加成功！");
 		document.profileForm.submit();
 		return true;
 	}

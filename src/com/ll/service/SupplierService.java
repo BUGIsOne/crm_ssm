@@ -13,4 +13,6 @@ public interface SupplierService {
 	Supplier findSupplier(Supplier supplier);
 	Supplier findSupplierBySname(String sname);
 	void deleteByPrimaryKey(Integer id);
+	//添加新供货商
+	boolean addSupplier(Supplier supplier);
 }

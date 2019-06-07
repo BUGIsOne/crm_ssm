@@ -39,7 +39,7 @@
       #{cid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
       #{period,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ll.pojo.Feedback">
+  <insert id="insertSelective" parameterType="com.ll.pojo.Feedback" keyProperty="id" useGeneratedKeys="true">
     insert into feedback
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

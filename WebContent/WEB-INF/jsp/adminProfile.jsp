@@ -46,6 +46,7 @@
 			return false;
 		}
 		document.profileForm.submit();
+		alert("添加成功！");
 		return true;
 	}
 </script>

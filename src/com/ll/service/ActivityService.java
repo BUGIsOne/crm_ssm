@@ -9,7 +9,7 @@ public interface ActivityService {
 
 	void updateactivity(Activity activity);
 	List<Activity> getActivitys();
-	Activity findCustomer(Activity activity);
+	Activity findActivity(Activity activity);
 	Activity findActivityByAitem(String aitem);
 	void deleteByPrimaryKey(Integer id);
 	//添加新活动

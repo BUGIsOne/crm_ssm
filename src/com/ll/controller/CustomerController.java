@@ -19,6 +19,7 @@ import com.ll.pojo.Customer;
 import com.ll.pojo.Customer;
 import com.ll.pojo.Customer;
 import com.ll.pojo.Customer;
+import com.ll.pojo.Customer;
 import com.ll.service.CustomerService;
 
 
@@ -34,8 +35,10 @@ public class CustomerController {
 	 * 查询
 	 */
 	 @RequestMapping("/find")
-	 public String findCustomer(@Param("cname") String cname, Model model){
+	 public String findCustomer(@Param("cname") String cname, HttpSession session, Model model){
 		Customer findCustomer = customerService.findCustomerByCname(cname);//根据aitem获取用户详情
+		//建立session，处理删除操作是方便传值
+		session.setAttribute("customer", findCustomer);
     	model.addAttribute("findCustomer", findCustomer);
     	logger.info("【操作】：根据cname查询用户详情...");
     	return "customerFind";
@@ -45,12 +48,26 @@ public class CustomerController {
 	  */
 	 @RequestMapping("/delete")
 	 public String delete(Customer customer, HttpSession session, Model model) {
-		 Customer customer2 = (Customer) session.getAttribute("u");
+		 Customer customer2 = (Customer) session.getAttribute("customer");
 		 customerService.deleteByPrimaryKey(customer2.getId());
 		 logger.info("删除成功");
 		 return "main";
 	}
-	
+	 /**
+	 * 添加新客户
+	 */
+	@RequestMapping(value="/profile")
+	public String profile(@ModelAttribute("customer") Customer customer) {
+		if (customerService.addCustomer(customer)) {
+			logger.info("成功");
+			return "main";// 注册成功，跳转到login.jsp
+		} else {
+			logger.info("失败");
+			// 使用@ModelAttribute("customer")与model.addAttribute("customer", customer)功能相同
+			// 在register.jsp页面上可以使用EL表达式${customer.uname}取出ModelAttribute的uname值
+			return "customerProfile";// 返回register.jsp
+		}
+	}
 	
 	/**
 	 * 保存用户资料
@@ -71,15 +88,7 @@ public class CustomerController {
 		return "customerProfile";// 返回用户资料填写页
 	}
 	
-	/**
-	 * 保存用户资料
-	 */
-	@RequestMapping(value="/profile",method=RequestMethod.POST)
-	public String saveProfile(@ModelAttribute("customer") Customer customer) {
-		customerService.updateCustomer(customer);
-		logger.info("更新成功");
-		return "main";// 注册成功，跳转到login.jsp
-	}
+	
 	
 	@RequestMapping(value = "/list")
 	public String listCustomers(Model model) {

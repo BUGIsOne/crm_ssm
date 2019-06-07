@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ll.pojo.Product;
 import com.ll.pojo.Product;
+import com.ll.pojo.Product;
 import com.ll.service.ProductService;
 
 @Controller
@@ -31,8 +32,10 @@ public class ProductController {
 	 * 查询
 	 */
 	 @RequestMapping("/find")
-	 public String findProduct(@Param("pname") String pname, Model model){
+	 public String findProduct(@Param("pname") String pname, HttpSession session, Model model){
 		Product findProduct = productService.findProductByPname(pname);  //根据aitem获取用户详情
+		//建立session，处理删除操作是方便传值
+		session.setAttribute("product", findProduct);
     	model.addAttribute("findProduct", findProduct);
     	logger.info("【操作】：根据pname查询用户详情...");
     	return "productFind";
@@ -42,22 +45,28 @@ public class ProductController {
 	  */
 	 @RequestMapping("/delete")
 	 public String delete(Product product, HttpSession session, Model model) {
-		 Product product2 = (Product) session.getAttribute("u");
+		 Product product2 = (Product) session.getAttribute("product");
 		 productService.deleteByPrimaryKey(product2.getId());
 		 logger.info("删除成功");
 		 return "main";
 	}
 	
-	
-	/**
-	 * 保存物资资料
+	 /**
+	 * 添加新产品
 	 */
-	@RequestMapping(value="/profile",method=RequestMethod.POST)
-	public String saveProfile(@ModelAttribute("product") Product product) {
-		productService.updateProduct(product);
-		logger.info("更新成功");
-		return "main";// 注册成功，跳转到login.jsp
+	@RequestMapping(value="/profile")
+	public String profile(@ModelAttribute("product") Product product) {
+		if (productService.addProduct(product)) {
+			logger.info("成功");
+			return "main";// 注册成功，跳转到login.jsp
+		} else {
+			logger.info("失败");
+			// 使用@ModelAttribute("product")与model.addAttribute("product", product)功能相同
+			// 在register.jsp页面上可以使用EL表达式${product.uname}取出ModelAttribute的uname值
+			return "productProfile";// 返回register.jsp
+		}
 	}
+
 	
 	@RequestMapping(value = "/list")
 	public String listProducts(Model model) {

@@ -33,10 +33,10 @@ function areUsure() {
 	        <!-- JSTL标签，请参考本书的相关内容 -->
 	        
 	        <tr>
-	            <td>${sessionScope.u.loginname }</td>
-	            <td>${sessionScope.u.psd }</td>
-	            <td>${sessionScope.u.aname }</td>
-	            <td>${sessionScope.u.identity }</td>
+	            <td>${findAdmin.loginname }</td>
+	            <td>${findAdmin.psd }</td>
+	            <td>${findAdmin.aname }</td>
+	            <td>${findAdmin.identity }</td>
 				<td colspan="2" align="center"><input type="button" value="删除"
 					onclick="areUsure()" />
 				</td>

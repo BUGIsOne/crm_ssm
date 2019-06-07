@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ll.pojo.Activity;
 import com.ll.pojo.Feedback;
 import com.ll.pojo.Feedback;
 import com.ll.service.FeedbackService;
@@ -30,8 +31,10 @@ public class FeedbackController {
 	 * 查询
 	 */
 	 @RequestMapping("/find")
-	 public String findFeedback(@Param("cid") Integer cid, Model model){
+	 public String findFeedback(@Param("cid") Integer cid, HttpSession session, Model model){
 		Feedback findFeedback = feedbackService.findFeedbackByCid(cid);  //根据aitem获取用户详情
+		//建立session，处理删除操作是方便传值
+		session.setAttribute("feedback", findFeedback);
     	model.addAttribute("findFeedback", findFeedback);
     	logger.info("【操作】：根据cid查询用户详情...");
     	return "feedbackFind";
@@ -41,22 +44,28 @@ public class FeedbackController {
 	  */
 	 @RequestMapping("/delete")
 	 public String delete(Feedback feedback, HttpSession session, Model model) {
-		 Feedback feedback2 = (Feedback) session.getAttribute("u");
+		 Feedback feedback2 = (Feedback) session.getAttribute("feedback");
 		 feedbackService.deleteByPrimaryKey(feedback2.getId());
 		 logger.info("删除成功");
 		 return "main";
 	}
 	
-	
-	/**
-	 * 保存服务信息资料
+	 /**
+	 * 添加新服务
 	 */
-	@RequestMapping(value="/profile",method=RequestMethod.POST)
-	public String saveProfile(@ModelAttribute("feedback") Feedback feedback) {
-		feedbackService.updateFeedback(feedback);
-		logger.info("更新成功");
-		return "main";// 注册成功，跳转到login.jsp
+	@RequestMapping(value="/profile")
+	public String profile(@ModelAttribute("feedback") Feedback feedback) {
+		if (feedbackService.addFeedback(feedback)) {
+			logger.info("成功");
+			return "main";// 注册成功，跳转到login.jsp
+		} else {
+			logger.info("失败");
+			// 使用@ModelAttribute("feedback")与model.addAttribute("feedback", feedback)功能相同
+			// 在register.jsp页面上可以使用EL表达式${feedback.uname}取出ModelAttribute的uname值
+			return "feedbackProfile";// 返回register.jsp
+		}
 	}
+
 	
 	@RequestMapping(value = "/list")
 	public String listFeedbacks(Model model) {

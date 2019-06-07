@@ -77,7 +77,7 @@ public class AdminController {
 	 * 查询
 	 */
 	 @RequestMapping("/find")
-	 public String findAdmin(@Param("aname") String aname, Model model){
+	 public String findAdmin(@Param("aname") String aname, HttpSession session, Model model){
 		 Admin findAdmin = adminService.findAdminByAname(aname);  //根据ID获取用户详情
     	//处理时间格式
 		/*
@@ -86,6 +86,8 @@ public class AdminController {
 		 * formatter.format(findAdmin.getCreatedate());
 		 * findAdmin.setCreatedate(createtime); }
 		 */
+		 //新的session来处理删除单个用户
+		 session.setAttribute("admin", findAdmin);
     	model.addAttribute("findAdmin", findAdmin);
     	logger.info("【操作】：根据aname查询用户详情...");
     	return "adminFind";
@@ -103,7 +105,9 @@ public class AdminController {
 	  */
 	 @RequestMapping("/delete")
 	 public String delete(Admin admin, HttpSession session, Model model) {
-		 Admin admin2 = (Admin) session.getAttribute("u");
+		 //永远删除登录的那个用户
+		 //Admin admin2 = (Admin) session.getAttribute("u");
+		 Admin admin2 = (Admin) session.getAttribute("admin");
 		 adminService.deleteByPrimaryKey(admin2.getId());
 		 logger.info("删除成功");
 		 return "main";

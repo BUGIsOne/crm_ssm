@@ -39,7 +39,7 @@
       #{sid,jdbcType=INTEGER}, #{pprice,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP}, 
       #{pnumber,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.ll.pojo.Product">
+  <insert id="insertSelective" parameterType="com.ll.pojo.Product" keyProperty="id" useGeneratedKeys="true">
     insert into product
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

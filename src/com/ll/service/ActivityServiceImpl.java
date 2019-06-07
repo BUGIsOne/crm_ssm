@@ -27,7 +27,7 @@ public class ActivityServiceImpl implements ActivityService{
 
 
 	@Override
-	public Activity findCustomer(Activity activity) {
+	public Activity findActivity(Activity activity) {
 		// TODO Auto-generated method stub
 		return activityDao.findByUidAndCus(activity);
 	}

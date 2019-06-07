@@ -16,7 +16,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-	//注册时检查输入项
+	
 	function allIsNull() {
 		var pname = document.queryForm.pname.value;
 		if (pname == "") {

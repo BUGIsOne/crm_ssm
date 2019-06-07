@@ -46,6 +46,17 @@ public class CustomerServiceImpl implements CustomerService{
 		customerDao.deleteByPrimaryKey(id);
 	}
 
+	@Override
+	public boolean addCustomer(Customer customer) {
+		// TODO Auto-generated method stub
+		int result = customerDao.insertSelective(customer);
+		if (1 == result) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 
 
 }
