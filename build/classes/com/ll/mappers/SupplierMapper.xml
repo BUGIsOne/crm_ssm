@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ll.dao.SupplierMapper">
+  <resultMap id="BaseResultMap" type="com.ll.pojo.Supplier">
+    <id column="Id" jdbcType="INTEGER" property="id" />
+    <result column="Snum" jdbcType="VARCHAR" property="snum" />
+    <result column="Sname" jdbcType="VARCHAR" property="sname" />
+    <result column="Saddr" jdbcType="VARCHAR" property="saddr" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createdate" />
+    <result column="Snumber" jdbcType="VARCHAR" property="snumber" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Id, Snum, Sname, Saddr, createDate, Snumber
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from supplier
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectBySname" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from supplier
+    where sname = #{sname,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from supplier
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ll.pojo.Supplier">
+    insert into supplier (Id, Snum, Sname, 
+      Saddr, createDate, Snumber
+      )
+    values (#{id,jdbcType=INTEGER}, #{snum,jdbcType=VARCHAR}, #{sname,jdbcType=VARCHAR}, 
+      #{saddr,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, #{snumber,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ll.pojo.Supplier">
+    insert into supplier
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="snum != null">
+        Snum,
+      </if>
+      <if test="sname != null">
+        Sname,
+      </if>
+      <if test="saddr != null">
+        Saddr,
+      </if>
+      <if test="createdate != null">
+        createDate,
+      </if>
+      <if test="snumber != null">
+        Snumber,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="snum != null">
+        #{snum,jdbcType=VARCHAR},
+      </if>
+      <if test="sname != null">
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="saddr != null">
+        #{saddr,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="snumber != null">
+        #{snumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ll.pojo.Supplier">
+    update supplier
+    <set>
+      <if test="snum != null">
+        Snum = #{snum,jdbcType=VARCHAR},
+      </if>
+      <if test="sname != null">
+        Sname = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="saddr != null">
+        Saddr = #{saddr,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        createDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="snumber != null">
+        Snumber = #{snumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ll.pojo.Supplier">
+    update supplier
+    set Snum = #{snum,jdbcType=VARCHAR},
+      Sname = #{sname,jdbcType=VARCHAR},
+      Saddr = #{saddr,jdbcType=VARCHAR},
+      createDate = #{createdate,jdbcType=TIMESTAMP},
+      Snumber = #{snumber,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectAllSupplier"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from supplier
+  </select>
+  <select id="findBySnumAndSname" parameterType="com.ll.pojo.Supplier" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from supplier
+    where snum = #{snum,jdbcType=VARCHAR} and sname = #{sname,jdbcType=VARCHAR}
+  </select>
+</mapper>

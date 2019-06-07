@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ll.dao.AdminMapper">
+  <resultMap id="BaseResultMap" type="com.ll.pojo.Admin">
+    <id column="Id" jdbcType="INTEGER" property="id" />
+    <result column="loginname" jdbcType="VARCHAR" property="loginname" />
+    <result column="psd" jdbcType="VARCHAR" property="psd" />
+    <result column="aname" jdbcType="VARCHAR" property="aname" />
+    <result column="createdate" jdbcType="TIMESTAMP" property="createdate" />
+    <result column="identity" jdbcType="INTEGER" property="identity" />
+    <result column="phonenumber" jdbcType="VARCHAR" property="phonenumber" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Id, loginname, psd, aname, createdate, identity, phonenumber
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from admin
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByAname" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from admin
+    where aname = #{aname,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from admin
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ll.pojo.Admin">
+    insert into admin (Id, loginname, psd, 
+      aname, createdate, identity, 
+      phonenumber)
+    values (#{id,jdbcType=INTEGER}, #{loginname,jdbcType=VARCHAR}, #{psd,jdbcType=VARCHAR}, 
+      #{aname,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, #{identity,jdbcType=INTEGER}, 
+      #{phonenumber,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ll.pojo.Admin" keyProperty="id" useGeneratedKeys="true">
+    insert into admin
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="loginname != null">
+        loginname,
+      </if>
+      <if test="psd != null">
+        psd,
+      </if>
+      <if test="aname != null">
+        aname,
+      </if>
+      <if test="createdate != null">
+        createdate,
+      </if>
+      <if test="identity != null">
+        identity,
+      </if>
+      <if test="phonenumber != null">
+        phonenumber,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="loginname != null">
+        #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="psd != null">
+        #{psd,jdbcType=VARCHAR},
+      </if>
+      <if test="aname != null">
+        #{aname,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="identity != null">
+        #{identity,jdbcType=INTEGER},
+      </if>
+      <if test="phonenumber != null">
+        #{phonenumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ll.pojo.Admin">
+    update admin
+    <set>
+      <if test="loginname != null">
+        loginname = #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="psd != null">
+        psd = #{psd,jdbcType=VARCHAR},
+      </if>
+      <if test="aname != null">
+        aname = #{aname,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="identity != null">
+        identity = #{identity,jdbcType=INTEGER},
+      </if>
+      <if test="phonenumber != null">
+        phonenumber = #{phonenumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ll.pojo.Admin">
+    update admin
+    set loginname = #{loginname,jdbcType=VARCHAR},
+      psd = #{psd,jdbcType=VARCHAR},
+      aname = #{aname,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=TIMESTAMP},
+      identity = #{identity,jdbcType=INTEGER},
+      phonenumber = #{phonenumber,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectAllAdmin"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from admin
+  </select>
+  <select id="findByAdminAndPass" parameterType="com.ll.pojo.Admin" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from admin
+    where loginname = #{loginname,jdbcType=VARCHAR} and psd = #{psd,jdbcType=VARCHAR}
+  </select>
+</mapper>

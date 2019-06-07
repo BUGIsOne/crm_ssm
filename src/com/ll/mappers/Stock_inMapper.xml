@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ll.dao.Stock_inMapper">
+  <resultMap id="BaseResultMap" type="com.ll.pojo.Stock_in">
+    <id column="Id" jdbcType="INTEGER" property="id" />
+    <result column="number_in" jdbcType="INTEGER" property="numberIn" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createdate" />
+    <result column="Uid" jdbcType="INTEGER" property="uid" />
+    <result column="Pnum" jdbcType="VARCHAR" property="pnum" />
+    <result column="Sid" jdbcType="INTEGER" property="sid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Id, number_in, createDate, Uid, Pnum, Sid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from stock_in
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from stock_in
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ll.pojo.Stock_in">
+    insert into stock_in (Id, number_in, createDate, 
+      Uid, Pnum, Sid)
+    values (#{id,jdbcType=INTEGER}, #{numberIn,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP}, 
+      #{uid,jdbcType=INTEGER}, #{pnum,jdbcType=VARCHAR}, #{sid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ll.pojo.Stock_in">
+    insert into stock_in
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="numberIn != null">
+        number_in,
+      </if>
+      <if test="createdate != null">
+        createDate,
+      </if>
+      <if test="uid != null">
+        Uid,
+      </if>
+      <if test="pnum != null">
+        Pnum,
+      </if>
+      <if test="sid != null">
+        Sid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="numberIn != null">
+        #{numberIn,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="pnum != null">
+        #{pnum,jdbcType=VARCHAR},
+      </if>
+      <if test="sid != null">
+        #{sid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ll.pojo.Stock_in">
+    update stock_in
+    <set>
+      <if test="numberIn != null">
+        number_in = #{numberIn,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null">
+        createDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uid != null">
+        Uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="pnum != null">
+        Pnum = #{pnum,jdbcType=VARCHAR},
+      </if>
+      <if test="sid != null">
+        Sid = #{sid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ll.pojo.Stock_in">
+    update stock_in
+    set number_in = #{numberIn,jdbcType=INTEGER},
+      createDate = #{createdate,jdbcType=TIMESTAMP},
+      Uid = #{uid,jdbcType=INTEGER},
+      Pnum = #{pnum,jdbcType=VARCHAR},
+      Sid = #{sid,jdbcType=INTEGER}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

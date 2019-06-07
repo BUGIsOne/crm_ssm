@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ll.dao.FeedbackMapper">
+  <resultMap id="BaseResultMap" type="com.ll.pojo.Feedback">
+    <id column="Id" jdbcType="INTEGER" property="id" />
+    <result column="Pid" jdbcType="INTEGER" property="pid" />
+    <result column="Fitem" jdbcType="VARCHAR" property="fitem" />
+    <result column="Cid" jdbcType="INTEGER" property="cid" />
+    <result column="Uid" jdbcType="INTEGER" property="uid" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="Period" jdbcType="VARCHAR" property="period" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Id, Pid, Fitem, Cid, Uid, createTime, Period
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from feedback
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByCid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from feedback
+    where cid = #{cid,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from feedback
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ll.pojo.Feedback">
+    insert into feedback (Id, Pid, Fitem, 
+      Cid, Uid, createTime, 
+      Period)
+    values (#{id,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{fitem,jdbcType=VARCHAR}, 
+      #{cid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{period,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ll.pojo.Feedback">
+    insert into feedback
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="pid != null">
+        Pid,
+      </if>
+      <if test="fitem != null">
+        Fitem,
+      </if>
+      <if test="cid != null">
+        Cid,
+      </if>
+      <if test="uid != null">
+        Uid,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="period != null">
+        Period,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="fitem != null">
+        #{fitem,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null">
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="period != null">
+        #{period,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ll.pojo.Feedback">
+    update feedback
+    <set>
+      <if test="pid != null">
+        Pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="fitem != null">
+        Fitem = #{fitem,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null">
+        Cid = #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        Uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="period != null">
+        Period = #{period,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ll.pojo.Feedback">
+    update feedback
+    set Pid = #{pid,jdbcType=INTEGER},
+      Fitem = #{fitem,jdbcType=VARCHAR},
+      Cid = #{cid,jdbcType=INTEGER},
+      Uid = #{uid,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      Period = #{period,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectAllFeedback"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from feedback
+  </select>
+  <select id="findByPidAndCid" parameterType="com.ll.pojo.Feedback" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from feedback
+    where pid = #{pid,jdbcType=INTEGER} and cid = #{cid,jdbcType=INTEGER}
+  </select>
+</mapper>

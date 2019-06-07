@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<!-- 数据库驱动包位置 -->
+	<classPathEntry location="D:\MySrc\eclipseworpla\ll\WebContent\WEB-INF\lib\mysql-connector-java-5.1.45-bin.jar" />
+	<context id="context1">
+		<!-- 不生成注释 -->
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<!-- 数据库链接URL、用户名、密码 -->
+		<jdbcConnection
+			connectionURL="jdbc:mysql://localhost:3301/crm_db?characterEncoding=utf8"
+			driverClass="com.mysql.jdbc.Driver" password="2024linli" userId="root" />
+		<!-- 长实数 -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- 生成模型的包名和位置 -->
+		<javaModelGenerator targetPackage="com.ll.pojo"
+			targetProject="ll\src">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<!-- 生成的映射文件包名和位置 -->
+		<sqlMapGenerator targetPackage="com.ll.mappers"
+			targetProject="ll\src">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		<!-- 生成DAO的包名和位置 -->
+		<javaClientGenerator targetPackage="com.ll.dao"
+			targetProject="ll\src" type="XMLMAPPER">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+		<table schema="crm_db" tableName="activity" domainObjectName="Activity"
+			enableCountByExample="false" 
+			enableUpdateByExample="false"
+			enableDeleteByExample="false" 
+			enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		<table schema="crm_db" tableName="admin" domainObjectName="Admin"
+			enableCountByExample="false" 
+			enableUpdateByExample="false"
+			enableDeleteByExample="false" 
+			enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		<table schema="crm_db" tableName="customer" domainObjectName="Customer"
+			enableCountByExample="false" 
+			enableUpdateByExample="false"
+			enableDeleteByExample="false" 
+			enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		<table schema="crm_db" tableName="feedback" domainObjectName="Feedback"
+			enableCountByExample="false" 
+			enableUpdateByExample="false"
+			enableDeleteByExample="false" 
+			enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		<table schema="crm_db" tableName="product" domainObjectName="Product"
+			enableCountByExample="false" 
+			enableUpdateByExample="false"
+			enableDeleteByExample="false" 
+			enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		<table schema="crm_db" tableName="stock_in" domainObjectName="Stock_in"
+			enableCountByExample="false" 
+			enableUpdateByExample="false"
+			enableDeleteByExample="false" 
+			enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		<table schema="crm_db" tableName="stock_out" domainObjectName="Stock_out"
+			enableCountByExample="false" 
+			enableUpdateByExample="false"
+			enableDeleteByExample="false" 
+			enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		<table schema="crm_db" tableName="supplier" domainObjectName="Supplier"
+			enableCountByExample="false" 
+			enableUpdateByExample="false"
+			enableDeleteByExample="false" 
+			enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+
+	</context>
+</generatorConfiguration>
